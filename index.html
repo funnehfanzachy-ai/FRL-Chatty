@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fusion Reactor Laboratory — The Experiment Continues</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<canvas id="world"></canvas><div id="vignette"></div><div id="flash"></div>
+<div id="menu" class="screen">
+ <header><div class="mark"><span class="orbit">◉</span><div>MIHAI-INSPIRED SCI-FI EXPERIENCE<small>ORIGINAL BROWSER GAME · BUILD 03 / DEEP SPACE RELEASE</small></div></div><div class="online"><i></i> SYSTEMS ONLINE</div></header>
+ <section class="menu-content"><div class="eyebrow"><span></span> DEEP SPACE RESEARCH DIVISION / FRL-01</div><h1>FUSION<br>REACTOR<br><em>LABORATORY</em></h1><p class="subtitle">THE EXPERIMENT CONTINUES</p><p class="intro">Beyond the atmosphere, the experiment never ends. Enter the laboratory, ignite the core, and face the unexpected.</p>
+ <div class="name-field"><label for="username">OPERATOR IDENTIFICATION</label><input id="username" maxlength="64" spellcheck="false" autocapitalize="off" placeholder="Operator" autocomplete="off"></div>
+ <div class="menu-buttons"><button class="primary" data-open="quick">QUICK PLAY <b>ENTER FACILITY</b></button><button data-open="browser">SERVER BROWSER</button><button data-open="create">CREATE ROOM</button><button data-open="join">JOIN WITH CODE</button><button data-open="single">SINGLEPLAYER</button></div>
+ <div class="secondary-menu"><button data-open="archive">Event Archive</button><button data-open="how">How to Play</button><button data-open="settings">Settings</button><button data-open="credits">Credits</button></div>
+ </section><footer><span>VESSEL FLR-09 / EXPERIMENTAL CONTAINMENT ARRAY</span><span>FICTIONAL SIMULATION · INTENSE VISUAL EFFECTS</span></footer>
+</div>
+<div id="modal" class="modal hidden"><div class="dialog"><div class="dialog-head"><div><small>LABORATORY / INTERFACE</small><h2 id="modal-title">TITLE</h2></div><button id="close-modal" class="icon">×</button></div><div id="modal-body"></div></div></div>
+<div id="loading" class="screen loading hidden"><div><div class="loader"></div><h2>ESTABLISHING UPLINK</h2><p id="load-tip">Synchronising facility systems...</p></div></div>
+<div id="hud" class="screen hidden">
+ <div class="hud-top"><div class="hud-label"><b>FRL-01</b><span id="location">RECEPTION</span></div><div class="room-info"><i></i> <span id="room-code">ROOM</span><button id="admin-btn" class="admin-access hidden">ADMIN / F2</button><button id="invite">INVITE</button><button id="pause-btn">PAUSE</button></div></div>
+ <div id="alert" class="alert hidden"><small>FACILITY EVENT / <span id="stage">WARNING</span></small><div id="event-name">MELTDOWN</div><div class="count"><span id="countdown">01:30</span><span id="event-obj">Maintain reactor stability</span></div><div class="bar"><i id="event-bar"></i></div></div>
+ <div id="telemetry" class="telemetry"><div class="tele-head"><span><i></i> REACTOR STATUS</span><b id="phase">OFFLINE</b></div><div class="temp"><small>CORE TEMPERATURE</small><strong id="temp">0</strong><span>FU</span></div><div class="stat"><span>STABILITY</span><div><i id="stability-bar"></i></div><b id="stability">100%</b></div><div class="stat"><span>CONTAINMENT</span><div><i id="integrity-bar"></i></div><b id="integrity">100%</b></div><div class="stat"><span>POWER</span><div><i id="power-bar"></i></div><b id="power">100%</b></div><div class="mini-stats"><span>HEAT <b id="heat">2</b></span><span>COOL <b id="cool">2</b></span><span>OUTPUT <b id="output">0</b></span></div></div>
+ <div id="system-access" class="system-access"><div id="pod-status"></div><div id="shutdown-status"></div><div id="admin-status" class="hidden"></div></div>
+ <div id="crosshair">+</div><div id="prompt" class="hidden"><kbd>E</kbd><div><span id="prompt-label"></span><small id="prompt-status"></small></div></div>
+ <div id="announcement" class="announcement hidden"><small><span class="sound-dot">●</span> FACILITY AI · ANNOUNCEMENT</small><p id="announce-text"></p></div>
+ <div id="toast" class="toast hidden"></div><div id="chatlog"></div>
+ <form id="chatform" class="hidden"><input id="chatinput" maxlength="160" placeholder="Type to the crew..." autocomplete="off"><button>Send</button></form>
+ <div id="players" class="players hidden"><h3>PERSONNEL</h3><div id="player-list"></div></div>
+ <div class="controls"><span><kbd>W A S D</kbd> MOVE</span><span><kbd>SHIFT</kbd> SPRINT</span><span><kbd>F</kbd> LIGHT</span><span><kbd>T</kbd> CHAT</span><span><kbd>M</kbd> MAP</span><span><kbd>TAB</kbd> CREW</span></div>
+ <div id="map" class="map hidden"><div class="map-top"><div><div class="map-eyebrow">FRL-01 / DECK 01 / NAVIGATION</div><div class="map-head">VESSEL SCHEMATIC</div><span id="map-where">YOU ARE HERE</span></div><button id="map-close" aria-label="Close map">×</button></div><div class="map-legend"><span>▲ NORTH</span><span class="legend-core">■ REACTOR</span><span class="legend-operations">■ OPERATIONS</span><span class="legend-crew">■ CREW DECK</span><span class="legend-pods">■ ESCAPE PODS</span></div><div id="map-grid"></div><div class="map-footer"><div><b>ROUTE TRACKER</b><span id="map-route">Select a sector to plot a route.</span></div><button id="map-clear">CLEAR</button></div><div class="map-hint">Select a room to plot the shortest corridor route. M or Esc to close.</div></div>
+ <div id="capture" class="capture"><div><small>PERSONNEL READY</small><h2>CLICK TO ENTER</h2><p>Mouse look requires pointer lock · Press Esc to release</p><button class="primary" id="capture-button">RESUME OPERATIONS</button></div></div>
+</div>
+<div id="cinematic" class="screen cinematic hidden"><div><small>ESCAPE POD / LAUNCH CONFIRMED</small><h2>THE EXPERIMENT<br>CONTINUES.</h2><p>Leaving the laboratory...</p><div class="bar"><i id="launch-progress"></i></div></div></div>
+<div id="result" class="screen result hidden"><div class="result-card"><small>FUSION REACTOR LABORATORY · SHIFT REPORT</small><h2 id="result-title">LABORATORY SAVED</h2><p id="result-desc"></p><div id="result-stats"></div><button class="admin-access hidden" id="result-admin">ADMIN PANEL</button><button id="result-restart">REGENERATE SHIFT</button><button id="result-menu">RETURN TO MAIN MENU</button></div></div>
+<script type="module" src="/game.js"></script>
+</body></html>

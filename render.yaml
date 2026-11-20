@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: frl-experiment-continues
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: ADMIN_ACCESS_CODE
+        sync: false
